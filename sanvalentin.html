@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi San Valentín?</title>
+
+<style>
+body{
+  margin:0;
+  height:80vh;
+  background-image: url("https://w0.peakpx.com/wallpaper/866/518/HD-wallpaper-tulips-field-at-sunset-sunset-tulips-field-flowers-beautiful-sky.jpg");
+  background-size: cover;
+  background-position: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow:hidden;
+}
+
+/* tarjeta */
+.card{
+  background: rgba(255,255,255,0.92);
+  padding:30px;
+  border-radius:25px;
+  width:90%;
+  max-width:550px;
+  text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
+  animation: aparecer 1.5s ease;
+}
+
+h1{
+  color:#d6336c;
+  font-size:24px;
+}
+
+p{
+  color:#555;
+  font-size:16px;
+}
+
+.buttons{
+  margin-top:25px;
+  position:relative;
+  height:120px;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+  position:absolute;
+}
+
+#yes{
+  background:#ff758f;
+  color:white;
+  left:50%;
+  transform:translateX(-120%);
+}
+
+#yes:hover{
+  background:#ff4d6d;
+  transform:translateX(-120%) scale(1.1);
+}
+
+#no{
+  background:#adb5bd;
+  color:white;
+  position: fixed;
+  left: 55%;
+  top: 52%;
+}
+
+/* mensaje siguiente paso */
+.next{
+  display:none;
+  font-size:18px;
+  color:#d6336c;
+  margin-top:20px;
+  animation: aparecer 1s ease;
+}
+
+@keyframes aparecer{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* corazones */
+.heart{
+  position:absolute;
+  font-size:18px;
+  animation: flotar 6s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes flotar{
+  from{transform:translateY(100vh); opacity:0;}
+  to{transform:translateY(-10vh); opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🌷 ¿Quieres ser mi San Valentín? 🌷</h1>
+  <p>Prometo cuidarte, hacerte sonreír  
+  y llenar tus días de momentos lindos 💕</p>
+
+  <div class="buttons">
+    <button id="yes">💖 SÍ</button>
+    <button id="no">🙈 NO</button>
+  </div>
+
+  <div class="next" id="next">
+    💘 Sabía que dirías que sí 💘 <br>
+    Prepárate para algo bonito…
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const next = document.getElementById("next");
+
+/* mover el NO por la pantalla */
+function moverNo(){
+  const padding = 20;
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+/* PC */
+noBtn.addEventListener("mouseenter", moverNo);
+
+/* Celular */
+noBtn.addEventListener("touchstart", moverNo);
+
+
+/* solo SI avanza */
+yesBtn.addEventListener("click", () => {
+  document.querySelector(".buttons").style.display="none";
+  next.style.display="block";
+});
+
+/* corazones flotando */
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💗";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*3+3)+"s";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),6000);
+},600);
+</script>
+
+</body>
+</html>
